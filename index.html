@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latifah Maghfira - Personal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,6 +17,7 @@
             background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
@@ -32,10 +34,14 @@
 
         .cinnamoroll-decoration {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             top: 20px;
             right: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ffcdd2;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         .profile-img {
@@ -61,6 +67,28 @@
             margin-bottom: 20px;
         }
 
+        .audio-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        #canvas {
+            width: 100%;
+            height: 200px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        audio {
+            width: calc(100% - 20px);
+            margin: 10px;
+        }
+
         .skills-section {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px;
@@ -82,6 +110,7 @@
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .skill-card:hover {
@@ -90,6 +119,8 @@
 
         .social-links {
             margin-top: 30px;
+            text-align: center;
+            padding-bottom: 30px;
         }
 
         .social-btn {
@@ -99,31 +130,13 @@
             color: white;
             text-decoration: none;
             border-radius: 25px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .social-btn:hover {
             transform: translateY(-3px);
-        }
-
-        /* Audio Player Styles */
-        .audio-player {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .audio-controls {
-            margin: 20px 0;
-        }
-
-        #audioCanvas {
-            width: 100%;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 768px) {
@@ -133,6 +146,16 @@
             
             h1 {
                 font-size: 2em;
+            }
+
+            .cinnamoroll-decoration {
+                width: 80px;
+                height: 80px;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -146,15 +169,13 @@
             <p class="subtitle">Student of TKJ Class 11 | Creative Writer | Digital Designer</p>
         </div>
 
-        <div class="audio-player">
-            <h2>Listen While You Browse</h2>
-            <div class="audio-controls">
-                <audio id="audio" controls>
-                    <source src="temptations.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-            <canvas id="audioCanvas"></canvas>
+        <div class="audio-section">
+            <h2>Music Player</h2>
+            <audio id="audio" controls>
+                <source src="temptations.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <canvas id="canvas"></canvas>
         </div>
 
         <div class="skills-section">
@@ -184,67 +205,85 @@
         </div>
 
         <div class="social-links">
-            <a href="https://www.instagram.com/__laavender/" class="social-btn">
+            <a href="https://www.instagram.com/__laavender/" class="social-btn" target="_blank">
                 Follow me on Instagram
             </a>
         </div>
     </div>
 
     <script>
-        // Audio Visualization
-        const audio = document.getElementById('audio');
-        const canvas = document.getElementById('audioCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Fix canvas resolution
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        // Create audio context and analyser
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const analyser = audioContext.createAnalyser();
-        const source = audioContext.createMediaElementSource(audio);
-        
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
-        
-        analyser.fftSize = 256;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-
-        // Draw visualization
-        function draw() {
-            requestAnimationFrame(draw);
-
-            analyser.getByteFrequencyData(dataArray);
-
-            ctx.fillStyle = '#f8bbd0';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            const barWidth = (canvas.width / bufferLength) * 2.5;
-            let barHeight;
-            let x = 0;
-
-            for(let i = 0; i < bufferLength; i++) {
-                barHeight = dataArray[i] / 2;
-
-                ctx.fillStyle = `rgb(${barHeight + 100}, ${barHeight + 50}, ${barHeight + 150})`;
-                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-
-                x += barWidth + 1;
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById("audio");
+            var audioContext = null;
+            var audioSource = null;
+            var analyser = null;
+            
+            function initAudioVisualizer() {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    audioSource = audioContext.createMediaElementSource(audio);
+                    
+                    audioSource.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                    
+                    analyser.fftSize = 256;
+                    
+                    const canvas = document.getElementById('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                    
+                    const bufferLength = analyser.frequencyBinCount;
+                    const dataArray = new Uint8Array(bufferLength);
+                    const barWidth = (canvas.width / bufferLength) * 2.5;
+                    
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        
+                        analyser.getByteFrequencyData(dataArray);
+                        
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
+                        let x = 0;
+                        
+                        for(let i = 0; i < bufferLength; i++) {
+                            const barHeight = dataArray[i] * 2;
+                            
+                            const r = barHeight + (25 * (i/bufferLength));
+                            const g = 250 * (i/bufferLength);
+                            const b = 50;
+                            
+                            ctx.fillStyle = `rgb(${r},${g},${b})`;
+                            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                            
+                            x += barWidth + 1;
+                        }
+                    }
+                    
+                    animate();
+                } catch(error) {
+                    console.error('Error initializing audio visualizer:', error);
+                }
             }
-        }
-
-        // Start visualization when audio plays
-        audio.addEventListener('play', () => {
-            if (audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            draw();
+            
+            audio.addEventListener('play', function() {
+                if (!audioContext) {
+                    initAudioVisualizer();
+                }
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+            });
+            
+            window.addEventListener('resize', function() {
+                if (canvas) {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                }
+            });
         });
     </script>
 </body>
