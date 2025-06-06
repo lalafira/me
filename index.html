@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latifah Maghfira - Personal Portfolio</title>
+    
+    <!-- Title sudah dioptimasi dengan keyword -->
+    <title>Latifah Maghfira – Siswi TKJ SMK Magda Nusantara | Mahasiswa Komputer Babelan</title>
+    
+    <!-- Meta description berisi kalimat deskriptif+keyword -->
+    <meta name="description" content="Latifah Maghfira, siswi TKJ kelas 11 di SMK Magda Nusantara Babelan. Kreatif di bidang desain digital, penulisan cerita, dan mahir Komputer.">
+    <!-- Meta keywords (meski tidak terlalu berpengaruh, tapi bisa membantu) -->
+    <meta name="keywords" content="latifah maghfira, siswi tkj, siswa smk magda nusantara, tkj babelan, latifah tkj, mahasiswa komputer babelan, latifah maghfira smk magda nusantara, smk magda nusantara">
+
+    <!-- Google/Javascript Sumber Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Structured Data: Person Profile -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Latifah Maghfira",
+      "jobTitle": "Siswi TKJ Kelas 11",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "SMK Magda Nusantara"
+      },
+      "url": "https://www.example.com", 
+      "sameAs": [
+        "https://www.instagram.com/__laavender/"
+      ],
+      "description": "Siswi TKJ kelas 11 di SMK Magda Nusantara, kreatif di bidang desain digital dan penulisan cerita."
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -136,11 +166,6 @@
                 font-size: 2em;
             }
 
-            .cinnamoroll-decoration {
-                width: 80px;
-                height: 80px;
-            }
-
             .profile-img {
                 width: 150px;
                 height: 150px;
@@ -150,12 +175,23 @@
 </head>
 <body>
     <div class="container">
+        <!-- Bagian Profil -->
         <div class="profile-section">
-            <img src="lala.jpg" alt="Latifah Maghfira" class="profile-img">
+            <img src="lala.jpg" alt="Foto Latifah Maghfira – Siswi TKJ SMK Magda Nusantara" class="profile-img">
+            <!-- h1 sudah menyebutkan nama lengkap beserta sekolah -->
             <h1>Latifah Maghfira</h1>
-            <p class="subtitle">Student of TKJ Class 11 | Creative Writer | Digital Designer</p>
+            <p class="subtitle">Siswi TKJ Kelas 11 di SMK Magda Nusantara Babelan | Mahasiswi Komputer</p>
         </div>
 
+        <!-- Bagian Deskripsi Singkat (mengandung keyword lebih banyak lagi) -->
+        <section>
+            <h2>Tentang Saya</h2>
+            <p>
+                Halo! Saya <strong>Latifah Maghfira</strong>, seorang <em>siswi TKJ</em> kelas 11 di <strong>SMK Magda Nusantara</strong>, Babelan. 
+                Saya passion di bidang <em>komputer</em>, desain digital, dan penulisan kreatif.             </p>
+        </section>
+
+        <!-- Bagian Audio/Visual -->
         <div class="audio-section">
             <h2>Music Player</h2>
             <audio id="audio" controls>
@@ -165,35 +201,37 @@
             <canvas id="canvas"></canvas>
         </div>
 
+        <!-- Bagian Skills -->
         <div class="skills-section">
-            <h2>My Skills</h2>
+            <h2>Keahlian Saya</h2>
             <div class="skills-grid">
                 <div class="skill-card">
-                    <h3>English Language</h3>
-                    <p>Proficient in written and verbal English communication</p>
+                    <h3>Bahasa Inggris</h3>
+                    <p>Mahir dalam komunikasi tertulis dan lisan</p>
                 </div>
                 <div class="skill-card">
-                    <h3>Novel Writing</h3>
-                    <p>Creative writer with storytelling abilities</p>
+                    <h3>Penulisan Novel</h3>
+                    <p>Penulis kreatif dengan kemampuan storytelling</p>
                 </div>
                 <div class="skill-card">
-                    <h3>Computer Operation</h3>
-                    <p>Skilled in computer operations and maintenance</p>
+                    <h3>Operasi Komputer</h3>
+                    <p>Terampil dalam instalasi, konfigurasi, dan perawatan komputer</p>
                 </div>
                 <div class="skill-card">
                     <h3>Microsoft Office</h3>
-                    <p>Proficient in Word, Excel, and PowerPoint</p>
+                    <p>Penguasaan Word, Excel, dan PowerPoint</p>
                 </div>
                 <div class="skill-card">
-                    <h3>Graphic Design</h3>
-                    <p>Creative designer using Canva</p>
+                    <h3>Desain Grafis</h3>
+                    <p>Desainer kreatif menggunakan Canva dan tools digital lainnya</p>
                 </div>
             </div>
         </div>
 
+        <!-- Bagian Tautan Sosial -->
         <div class="social-links">
             <a href="https://www.instagram.com/__laavender/" class="social-btn" target="_blank">
-                Follow me on Instagram
+                Ikuti Saya di Instagram
             </a>
         </div>
     </div>
